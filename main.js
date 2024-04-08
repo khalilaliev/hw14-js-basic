@@ -84,13 +84,12 @@ const sales = {
 };
 
 const amountOfSalaries = (obj) => {
-  if (Array.isArray(obj)) {
-    return obj.reduce((acc, seller) => acc + amountOfSalaries(seller), 0);
-  }
   if (typeof obj === "object" && obj !== null) {
     let sum = obj.profit;
     if (obj.clients) {
-      sum += amountOfSalaries(obj.clients);
+      obj.clients.forEach((element) => {
+        sum += amountOfSalaries(element);
+      });
     }
     return sum;
   }
